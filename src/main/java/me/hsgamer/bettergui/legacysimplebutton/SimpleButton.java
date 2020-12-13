@@ -11,7 +11,6 @@ import me.hsgamer.bettergui.lib.core.bukkit.clicktype.ClickTypeUtils;
 import me.hsgamer.bettergui.lib.core.bukkit.gui.Button;
 import me.hsgamer.bettergui.lib.core.bukkit.gui.button.PredicateButton;
 import me.hsgamer.bettergui.lib.core.collections.map.CaseInsensitiveStringHashMap;
-import me.hsgamer.bettergui.lib.core.collections.map.CaseInsensitiveStringMap;
 import me.hsgamer.bettergui.lib.simpleyaml.configuration.ConfigurationSection;
 import me.hsgamer.bettergui.requirement.RequirementSetting;
 
@@ -35,7 +34,7 @@ public class SimpleButton extends BaseWrappedButton {
         Map<AdvancedClickType, RequirementSetting> clickRequirements = new ConcurrentHashMap<>();
 
         Map<String, AdvancedClickType> clickTypeMap = ClickTypeUtils.getClickTypeMap();
-        Map<String, Object> keys = new CaseInsensitiveStringMap<>(section.getValues(false));
+        Map<String, Object> keys = new CaseInsensitiveStringHashMap<>(section.getValues(false));
 
         RequirementSetting defaultSetting = new RequirementSetting(getMenu(), getName() + "_click_default");
         Optional.ofNullable(keys.get("default"))
