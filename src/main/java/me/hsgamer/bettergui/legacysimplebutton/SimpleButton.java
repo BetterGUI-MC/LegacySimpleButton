@@ -3,7 +3,6 @@ package me.hsgamer.bettergui.legacysimplebutton;
 import me.hsgamer.bettergui.api.button.BaseWrappedButton;
 import me.hsgamer.bettergui.api.button.WrappedButton;
 import me.hsgamer.bettergui.api.menu.Menu;
-import me.hsgamer.bettergui.builder.ButtonBuilder;
 import me.hsgamer.bettergui.button.MenuButton;
 import me.hsgamer.bettergui.config.MainConfig;
 import me.hsgamer.bettergui.lib.core.bukkit.clicktype.AdvancedClickType;
@@ -65,11 +64,6 @@ public class SimpleButton extends BaseWrappedButton {
         menuButton.setFromSection(section);
 
         PredicateButton predicateButton = new PredicateButton(menuButton);
-        Optional.ofNullable(keys.get("fallback"))
-                .filter(o -> o instanceof ConfigurationSection)
-                .map(o -> (ConfigurationSection) o)
-                .map(subsection -> ButtonBuilder.INSTANCE.getButton(getMenu(), getName() + "_fallback", subsection))
-                .ifPresent(predicateButton::setFallbackButton);
 
         this.checkOnlyOnCreation = Optional.ofNullable(keys.get("check-only-on-creation")).map(String::valueOf).map(Boolean::parseBoolean).orElse(this.checkOnlyOnCreation);
 
@@ -124,10 +118,6 @@ public class SimpleButton extends BaseWrappedButton {
             return;
         }
         Button tempButton = ((PredicateButton) this.button).getButton();
-        if (tempButton instanceof WrappedButton) {
-            ((WrappedButton) tempButton).refresh(uuid);
-        }
-        tempButton = ((PredicateButton) this.button).getFallbackButton();
         if (tempButton instanceof WrappedButton) {
             ((WrappedButton) tempButton).refresh(uuid);
         }
